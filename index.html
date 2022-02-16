@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Signature Pad demo</title>
+  <meta name="description" content="Signature Pad - HTML5 canvas based smooth signature drawing using variable width spline interpolation.">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <link rel="stylesheet" href="css/signature-pad.css">
+
+  <!--[if IE]>
+    <link rel="stylesheet" type="text/css" href="css/ie9.css">
+  <![endif]-->
+
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39365077-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+  <script type="text/javascript">
+    const initialize = () => {
+      //Basic Actions Section
+      const onboardButton = document.getElementById('onboardButton');
+      const getAccountsButton = document.getElementById('getAccountsButton');
+      const mintAutographButton = document.getElementById('mintAutographButton');
+      const errorMessageHeader = document.getElementById('errorMessageHeader');
+      const signatureName = document.getElementById('signatureName');
+      signatureName.innerHTML = "todo" // get from url
+
+      // const getAccountsResult = document.getElementById('getAccountsResultButton');
+
+      //Created check function to see if the MetaMask extension is installed
+      const isMetaMaskInstalled = () => {
+        //Have to check the ethereum binding on the window object to see if it's installed
+        const { ethereum } = window;
+        return Boolean(ethereum && ethereum.isMetaMask);
+      };
+
+      //We create a new MetaMask onboarding object to use in our app
+      // const onboarding = new MetaMaskOnboarding({ forwarderOrigin });
+
+      //This will start the onboarding proccess
+      const onClickInstall = () => {
+        onboardButton.innerText = 'Onboarding in progress';
+        onboardButton.disabled = true;
+        //On this object we have startOnboarding which will start the onboarding process for our end user
+        //
+        window.open('https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn','_blank')
+        // onboarding.startOnboarding();
+      };
+
+      const onClickConnect = async () => {
+        try {
+          // Will open the MetaMask UI
+          // You should disable this button while the request is pending!
+          await ethereum.request({ method: 'eth_requestAccounts' });
+
+          //we use eth_accounts because it returns a list of addresses owned by us.
+
+        } catch (error) {
+          console.error(error);
+          // getAccountsResult.innerHTML = 'Not able to get accounts';
+        }
+          const accounts = await ethereum.request({ method: 'eth_accounts' });
+          //We take the first address in the array of addresses and display it
+          getAccountsResult.innerHTML = accounts[0] || 'Not able to get accounts';
+      };
+
+      const MetaMaskClientCheck = () => {
+        //Now we check to see if Metmask is installed
+        if (!isMetaMaskInstalled()) {
+          //If it isn't installed we ask the user to click to install it
+          onboardButton.innerText = 'Click here to install MetaMask!';
+          //When the button is clicked we call th is function
+          onboardButton.onclick = onClickInstall;
+          //The button is now disabled
+          onboardButton.disabled = false;
+        } else {
+          //If MetaMask is installed we ask the user to connect to their wallet
+          onboardButton.innerText = 'Connect';
+          //When the button is clicked we call this function to connect the users MetaMask Wallet
+          onboardButton.onclick = onClickConnect;
+          //The button is now disabled
+          onboardButton.disabled = false;
+        }
+      };
+
+      // //Eth_Accounts-getAccountsButton
+      // getAccountsButton.addEventListener('click', async () => {
+      //   //we use eth_accounts because it returns a list of addresses owned by us.
+      //   const accounts = await ethereum.request({ method: 'eth_accounts' });
+      //   //We take the first address in the array of addresses and display it
+      //   getAccountsResult.innerHTML = accounts[0] || 'Not able to get accounts';
+      // });
+
+      mintAutographButton.addEventListener('click', async () => {
+        errorMessageHeader.innerHTML = ""
+        const accounts = await ethereum.request({ method: 'eth_accounts' });
+        const secretPreimage = "todo" //get from URL
+        const name = "todo" //get from URL
+        if(accounts && accounts[0]){
+          var params = [
+            {
+              from: accounts[0],
+              to: '0xd46e8dd67c5d32be8058bb8eb970870f07244567',
+              gas: '0x76c0', // 30400
+              gasPrice: '0x9184e72a000', // 10000000000000
+              value: '0x9184e72a', // 2441406250
+              data:
+                '0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675',
+            },
+          ];
+
+          ethereum
+            .request({
+              method: 'eth_sendTransaction',
+              params,
+            })
+            .then((result) => {
+              // The result varies by RPC method.
+              // For example, this method will return a transaction hash hexadecimal string on success.
+            })
+            .catch((error) => {
+              // If the request fails, the Promise will reject with an error.
+            });
+        }else{
+          errorMessageHeader.innerHTML = "please connect an account"
+        }
+
+        // sendButton.onclick = () => {
+        //   web3.eth.sendTransaction({
+        //     from: accounts[0],
+        //     to: '0x2f318C334780961FB129D2a6c30D0763d9a5C970',
+        //     value: '0x29a2241af62c0000',
+        //     gas: 21000,
+        //     gasPrice: 20000000000,
+        //   }, (result) => {
+        //     console.log(result)
+        //   })
+        // }
+
+
+        // const accounts = await ethereum.request({ method: 'eth_accounts' });
+        // getAccountsResult.innerHTML = accounts[0] || 'Not able to get accounts';
+      });
+      MetaMaskClientCheck();
+    };
+    window.addEventListener('DOMContentLoaded', initialize);
+
+  </script>
+</head>
+<body onselectstart="return false">
+  <button id="onboardButton">do!</button>
+  <!-- <button id="getAccountsButton">getAccountsButton</button> -->
+  <div><h3 id="getAccountsResult"></h3></div>
+  <div><h3 id="errorMessageHeader"></h3></div>
+<!--   <a id="github" style="position: absolute; top: 0; right: 0; border: 0" href="https://github.com/szimek/signature_pad">
+    <img src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub">
+  </a> -->
+
+  <div id="signature-pad" class="signature-pad">
+    <div class="signature-pad--body">
+      <canvas></canvas>
+    </div>
+    <div class="signature-pad--footer">
+      <div class="description">Sign autograph above</div>
+      <div><h3 id="signatureName"></h3></div>
+
+      <div class="signature-pad--actions">
+        <div>
+          <button type="button" class="button clear" data-action="clear">Clear</button>
+          <!-- <button type="button" class="button" data-action="change-color">Change color</button> -->
+          <!-- <button type="button" class="button" data-action="undo">Undo</button> -->
+
+        </div>
+        <div>
+          <!-- <button type="button" class="button save" data-action="save-png">Save as PNG</button> -->
+          <!-- <button type="button" class="button save" data-action="save-jpg">Save as JPG</button> -->
+          <button type="button" class="button save" data-action="save-svg">Save as SVG</button>
+          <button id="mintAutographButton" type="button" >Mint Autograph</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/signature_pad.umd.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

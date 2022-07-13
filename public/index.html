@@ -10,13 +10,14 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-  <link rel="stylesheet" src="css/signature-pad.css" type="text/css">
+  <link rel="stylesheet" src="./css/signature-pad.css" type="text/css">
 
   <!--[if IE]>
-    <link rel="stylesheet" type="text/css" href="css/ie9.css">
+  <link rel="stylesheet" type="text/css" href="css/ie9.css">
   <![endif]-->
 
   <script type="text/javascript">
+    console.log("test1")
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', 'UA-39365077-1']);
     _gaq.push(['_trackPageview']);
@@ -28,6 +29,7 @@
     })();
   </script>
   <script type="text/javascript">
+    console.log('test2')
     const initialize = () => {
       //Basic Actions Section
       const onboardButton = document.getElementById('onboardButton');
@@ -73,7 +75,7 @@
         }
           const accounts = await ethereum.request({ method: 'eth_accounts' });
           //We take the first address in the array of addresses and display it
-          getAccountsResult.innerHTML = accounts[0] || 'Not able to get accounts';
+          // getAccountsResult.innerHTML = accounts[0] || 'Not able to get accounts';
       };
 
       const MetaMaskClientCheck = () => {
@@ -194,7 +196,8 @@
     </div>
   </div>
 
-  <script href="js/signature_pad.umd.js"></script>
-  <script href="js/app.js"></script>
+  <script type='text/javascript' src="./js/signature_pad.umd.js"></script>
+  <script type='text/javascript' src="./js/app.js"></script>
+
 </body>
 </html>

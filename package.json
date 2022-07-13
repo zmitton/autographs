@@ -19,5 +19,12 @@
   "dependencies": {
     "@metamask/onboarding": "^1.0.1",
     "signature_pad": "^4.0.2"
+  },
+  "devDependencies": {
+    "eth-util-lite": "^1.0.1",
+    "ethereumjs-tx": "^1.1.1",
+    "ethereumjs-util": "^7.1.4",
+    "isomorphic-rpc": "^1.2.2",
+    "rlp": "^3.0.0"
   }
 }

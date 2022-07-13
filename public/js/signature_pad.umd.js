@@ -1,7 +1,12 @@
+/*!
+ * Signature Pad v4.0.4 | https://github.com/szimek/signature_pad
+ * (c) 2022 Szymon Nowak | Released under the MIT license
+ */
+
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.SignaturePad = factory());
+        typeof define === 'function' && define.amd ? define(factory) :
+            (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.SignaturePad = factory());
 })(this, (function () { 'use strict';
 
     class Point {
@@ -203,10 +208,9 @@
                 }
             };
             this._handlePointerEnd = (event) => {
-                this._drawningStroke = false;
-                const wasCanvasTouched = event.target === this.canvas;
-                if (wasCanvasTouched) {
+                if (this._drawningStroke) {
                     event.preventDefault();
+                    this._drawningStroke = false;
                     this._strokeEnd(event);
                 }
             };
@@ -300,7 +304,7 @@
                 this.clear();
             }
             this._fromData(pointGroups, this._drawCurve.bind(this), this._drawDot.bind(this));
-            this._data = clear ? pointGroups : this._data.concat(pointGroups);
+            this._data = this._data.concat(pointGroups);
         }
         toData() {
             return this._data;

@@ -1,5 +1,6 @@
 var wrapper = document.getElementById("signature-pad");
 var saveSVGButton = wrapper.querySelector("[data-action=save-svg]");
+var clearButton = wrapper.querySelector("[data-action=clear]");
 var canvas = wrapper.querySelector("canvas");
 var signaturePad = new SignaturePad(canvas, {
   // It's Necessary to use an opaque color when saving image as JPEG;
@@ -11,6 +12,7 @@ var signaturePad = new SignaturePad(canvas, {
 // to make it look crisp on mobile devices.
 // This also causes canvas to be cleared.
 function resizeCanvas() {
+  /*
   // When zoomed out to less than 100%, for some very strange reason,
   // some browsers report devicePixelRatio as less than 1
   // and only part of the canvas is cleared then.
@@ -20,13 +22,30 @@ function resizeCanvas() {
   canvas.width = canvas.offsetWidth * ratio;
   canvas.height = canvas.offsetHeight * ratio;
   canvas.getContext("2d").scale(ratio, ratio);
-
+*/
+  // setupCanvas()
   // This library does not listen for canvas changes, so after the canvas is automatically
   // cleared by the browser, SignaturePad#isEmpty might still return false, even though the
   // canvas looks empty, because the internal data of this library wasn't cleared. To make sure
   // that the state of this library is consistent with visual state of the canvas, you
   // have to clear it manually.
   signaturePad.clear();
+}
+
+function setupCanvas() {
+  // Get the device pixel ratio, falling back to 1.
+  var dpr = Math.max(window.devicePixelRatio || 1, 1);
+  // Get the size of the canvas in CSS pixels.
+  var rect = canvas.getBoundingClientRect();
+  // Give the canvas pixel dimensions of their CSS
+  // size * the device pixel ratio.
+  canvas.width = rect.width * dpr;
+  canvas.height = rect.height * dpr;
+  var ctx = canvas.getContext('2d');
+  // Scale all drawing operations by the dpr, so you
+  // don't have to worry about the difference.
+  ctx.scale(dpr, dpr);
+  // return ctx;
 }
 
 // On mobile devices it might make more sense to listen to orientation change,
@@ -79,5 +98,7 @@ saveSVGButton.addEventListener("click", function (event) {
   }
 });
 
-
+clearButton.addEventListener('click', function(e) {
+  signaturePad.clear();
+});
 

@@ -10,16 +10,11 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-  <link rel="stylesheet" src="./css/signature-pad.css" type="text/css">
-
-  <!--[if IE]>
-  <link rel="stylesheet" type="text/css" href="css/ie9.css">
-  <![endif]-->
+  <link rel="stylesheet" href="./css/signature-pad.css" type="text/css">
 
   <script type="text/javascript">
-    console.log("test1")
     var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-39365077-1']);
+    _gaq.push(['_setAccount', '']);
     _gaq.push(['_trackPageview']);
 
     (function() {
@@ -29,7 +24,6 @@
     })();
   </script>
   <script type="text/javascript">
-    console.log('test2')
     const initialize = () => {
       //Basic Actions Section
       const onboardButton = document.getElementById('onboardButton');
@@ -181,7 +175,7 @@
 
       <div class="signature-pad--actions">
         <div>
-          <button type="button" class="button clear" data-action="clear">Clear</button>
+          <button type="button" class="button-clear" data-action="clear">Clear</button>
           <!-- <button type="button" class="button" data-action="change-color">Change color</button> -->
           <!-- <button type="button" class="button" data-action="undo">Undo</button> -->
 

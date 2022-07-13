@@ -12,7 +12,7 @@ var signaturePad = new SignaturePad(canvas, {
 // to make it look crisp on mobile devices.
 // This also causes canvas to be cleared.
 function resizeCanvas() {
-  /*
+
   // When zoomed out to less than 100%, for some very strange reason,
   // some browsers report devicePixelRatio as less than 1
   // and only part of the canvas is cleared then.
@@ -22,7 +22,7 @@ function resizeCanvas() {
   canvas.width = canvas.offsetWidth * ratio;
   canvas.height = canvas.offsetHeight * ratio;
   canvas.getContext("2d").scale(ratio, ratio);
-*/
+
   // setupCanvas()
   // This library does not listen for canvas changes, so after the canvas is automatically
   // cleared by the browser, SignaturePad#isEmpty might still return false, even though the

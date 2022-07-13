@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -18,7 +19,8 @@
   "homepage": "https://github.com/zmitton/autographs#readme",
   "dependencies": {
     "@metamask/onboarding": "^1.0.1",
-    "signature_pad": "^4.0.2"
+    "signature_pad": "^4.0.2",
+    "express": "^4.18.1"
   },
   "devDependencies": {
     "eth-util-lite": "^1.0.1",

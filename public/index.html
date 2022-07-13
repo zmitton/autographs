@@ -31,7 +31,7 @@
       const mintAutographButton = document.getElementById('mintAutographButton');
       const errorMessageHeader = document.getElementById('errorMessageHeader');
       const signatureName = document.getElementById('signatureName');
-      signatureName.innerHTML = "todo" // get from url
+      // signatureName.innerHTML = "todo" // get from url
 
       // const getAccountsResult = document.getElementById('getAccountsResultButton');
 
@@ -157,10 +157,8 @@
   </script>
 </head>
 <body onselectstart="return false">
-  <button id="onboardButton">do!</button>
   <!-- <button id="getAccountsButton">getAccountsButton</button> -->
-  <div><h3 id="getAccountsResult"></h3></div>
-  <div><h3 id="errorMessageHeader"></h3></div>
+
 <!--   <a id="github" style="position: absolute; top: 0; right: 0; border: 0" href="https://github.com/szimek/signature_pad">
     <img src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub">
   </a> -->
@@ -170,21 +168,22 @@
       <canvas></canvas>
     </div>
     <div class="signature-pad--footer">
-      <div class="description">Sign autograph above</div>
+<!--      <div class="description">Sign autograph above</div>-->
       <div><h3 id="signatureName"></h3></div>
 
       <div class="signature-pad--actions">
         <div>
-          <button type="button" class="button-clear" data-action="clear">Clear</button>
+          <span id="getAccountsResult"></span><
+          <span id="errorMessageHeader"></span>
+          <button id="onboardButton" class="button">do!</button>
+          <button type="button" class="button" data-action="clear">Clear</button>
           <!-- <button type="button" class="button" data-action="change-color">Change color</button> -->
           <!-- <button type="button" class="button" data-action="undo">Undo</button> -->
-
-        </div>
-        <div>
           <!-- <button type="button" class="button save" data-action="save-png">Save as PNG</button> -->
           <!-- <button type="button" class="button save" data-action="save-jpg">Save as JPG</button> -->
-          <button type="button" class="button save" data-action="save-svg">Save as SVG</button>
-          <button id="mintAutographButton" type="button" >Mint Autograph</button>
+
+          <button type="button" class="button" data-action="save-svg">Save as SVG</button>
+          <button id="mintAutographButton" class="button" type="button" >Mint</button>
         </div>
       </div>
     </div>

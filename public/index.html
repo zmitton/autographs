@@ -11,19 +11,12 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
   <link rel="stylesheet" href="css/signature-pad.css" type="text/css">
+  
+  <script type='text/javascript' src="./js/truffle-contract.js"></script>
+
 
   <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', '']);
-    _gaq.push(['_trackPageview']);
 
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-  <script type="text/javascript">
     const initialize = () => {
       //Basic Actions Section
       const onboardButton = document.getElementById('onboardButton');
@@ -99,22 +92,31 @@
       //   getAccountsResult.innerHTML = accounts[0] || 'Not able to get accounts';
       // });
 
+
+
+
+      // var encodedTxData = '0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675'
       mintAutographButton.addEventListener('click', async () => {
+        var abi = [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"approved","type":"address"},{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"operator","type":"address"},{"indexed":false,"internalType":"bool","name":"approved","type":"bool"}],"name":"ApprovalForAll","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"Transfer","type":"event"},{"inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"approve","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"name":"autographSvgs","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"baseTokenURI","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"name":"exists","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"getApproved","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"operator","type":"address"}],"name":"isApprovedForAll","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"name","type":"string"},{"internalType":"string","name":"svg","type":"string"}],"name":"mint","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"name":"names","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"ownerOf","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"safeTransferFrom","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"},{"internalType":"bytes","name":"data","type":"bytes"}],"name":"safeTransferFrom","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"operator","type":"address"},{"internalType":"bool","name":"approved","type":"bool"}],"name":"setApprovalForAll","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"newURI","type":"string"}],"name":"setBaseURI","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bytes4","name":"interfaceId","type":"bytes4"}],"name":"supportsInterface","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"tokenSvgHash","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"tokenURI","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"transferFrom","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"}]
+        var contract = TruffleContract({abi:abi, address: "0xE1265B7d94fFaE79C75F59e3a454a29e7235b1D3"})
+        console.log(contract)
+
         errorMessageHeader.innerHTML = ""
         const accounts = await ethereum.request({ method: 'eth_accounts' });
-        const secretPreimage = "todo" //get from URL
-        const name = "todo" //get from URL
+        // const secretPreimage = "todo" 
+        const name = "Vitalik Buterin" 
         if(accounts && accounts[0]){
+          
+          // contract.mint.sendTransaction()
+
+
           var params = [
             {
               from: accounts[0],
-              to: '0xc85c867Ae74746c800eE9B35be9F5f4FA866d9fB',
-              gas: '0x76c00', // 30400
-              // gasPrice: '0x9184e72a000', // 100,000,000,000
-              value: '0x0', // 2441406250
-              data:
-                '0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675',
-
+              to: '0xE1265B7d94fFaE79C75F59e3a454a29e7235b1D3',
+              // value: '0x00',
+              data: '0x12345678'//encodedTxData
+                // '0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675',
             },
           ];
 
@@ -133,22 +135,6 @@
         }else{
           errorMessageHeader.innerHTML = "please connect an account"
         }
-
-        // sendButton.onclick = () => {
-        //   web3.eth.sendTransaction({
-        //     from: accounts[0],
-        //     to: '0x2f318C334780961FB129D2a6c30D0763d9a5C970',
-        //     value: '0x29a2241af62c0000',
-        //     gas: 21000,
-        //     gasPrice: 20000000000,
-        //   }, (result) => {
-        //     console.log(result)
-        //   })
-        // }
-
-
-        // const accounts = await ethereum.request({ method: 'eth_accounts' });
-        // getAccountsResult.innerHTML = accounts[0] || 'Not able to get accounts';
       });
       MetaMaskClientCheck();
     };
@@ -157,11 +143,6 @@
   </script>
 </head>
 <body onselectstart="return false">
-  <!-- <button id="getAccountsButton">getAccountsButton</button> -->
-
-<!--   <a id="github" style="position: absolute; top: 0; right: 0; border: 0" href="https://github.com/szimek/signature_pad">
-    <img src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub">
-  </a> -->
 
   <div id="signature-pad" class="signature-pad">
     <div class="signature-pad--body">
@@ -177,11 +158,6 @@
           <span id="errorMessageHeader"></span>
           <button id="onboardButton" class="button">do!</button>
           <button type="button" class="button" data-action="clear">Clear</button>
-          <!-- <button type="button" class="button" data-action="change-color">Change color</button> -->
-          <!-- <button type="button" class="button" data-action="undo">Undo</button> -->
-          <!-- <button type="button" class="button save" data-action="save-png">Save as PNG</button> -->
-          <!-- <button type="button" class="button save" data-action="save-jpg">Save as JPG</button> -->
-
           <button type="button" class="button" data-action="save-svg">Save as SVG</button>
           <button id="mintAutographButton" class="button" type="button" >Mint</button>
         </div>

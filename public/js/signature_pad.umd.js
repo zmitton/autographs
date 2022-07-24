@@ -507,7 +507,7 @@
                 }
             }
         }
-        _toSVG() {
+        _toSVG(ascii) {
             const pointGroups = this._data;
             const ratio = Math.max(window.devicePixelRatio || 1, 1);
             const minX = 0;
@@ -563,7 +563,11 @@
             }
             const footer = '</svg>';
             const data = header + body + footer;
-            return prefix + btoa(data);
+            if(ascii){
+                return data;
+            }else{
+                return prefix + btoa(data);
+            }
         }
     }
 

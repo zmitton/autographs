@@ -12,8 +12,8 @@
 
   <link rel="stylesheet" href="css/signature-pad.css" type="text/css">
   
-  <!-- <script type='text/javascript' src="./js/truffle-contract.js"></script> -->
   <script type='text/javascript' src="./js/W3.js"></script>
+  <script type='text/javascript' src="./js/svgo.js"></script>
 
 
   <script type="text/javascript">
@@ -105,33 +105,62 @@
         const accounts = await ethereum.request({ method: 'eth_accounts' });
 
         var svg = signaturePad._toSVG(true)
-        var encodedTxdata = a.methods.mint("Vitalik Buterin", svg).encodeABI()
-        if(accounts && accounts[0]){
-          var params = [
-            {
-              from: accounts[0],
-              to: '0xE1265B7d94fFaE79C75F59e3a454a29e7235b1D3',
-              // value: '0x00',
-              // data: '0x12345678'
-              data: encodedTxdata
-            },
-          ];
+        var optimized = optimize(svg)
 
-          ethereum
-            .request({
-              method: 'eth_sendTransaction',
-              params,
-            })
-            .then((result) => {
-              // The result varies by RPC method.
-              // For example, this method will return a transaction hash hexadecimal string on success.
-            })
-            .catch((error) => {
-              // If the request fails, the Promise will reject with an error.
-            });
-        }else{
-          errorMessageHeader.innerHTML = "please connect an account"
+        function optimize(input){
+
+          // const { optimize } = require('svgo');
+          const result = svgo(input, {
+            name: "cleanupNumericValues",
+            // plugins: [
+            //   {
+            //     floatPrecision: 1,
+            //     leadingZero: true,
+            //     defaultPx: true,
+            //     convertToPx: true,
+            //   }
+            // ],
+            // optional but recommended field
+            // path: 'path-to.svg',
+            // all config fields are also available here
+            multipass: true,
+          });
+          const output = result.data;
+
+          console.log(input)
+          console.log(output)
+          console.log("INPUT LENGTH: ", input.length)
+          console.log("OUTPUT LENGTH: ", output.length)
+
         }
+
+        // var encodedTxdata = a.methods.mint("Vitalik Buterin", svg).encodeABI()
+        // if(accounts && accounts[0]){
+        //   var params = [
+        //     {
+        //       from: accounts[0],
+        //       to: '0xE1265B7d94fFaE79C75F59e3a454a29e7235b1D3',
+        //       // value: '0x00',
+        //       // data: '0x12345678'
+        //       data: encodedTxdata
+        //     },
+        //   ];
+
+        //   ethereum
+        //     .request({
+        //       method: 'eth_sendTransaction',
+        //       params,
+        //     })
+        //     .then((result) => {
+        //       // The result varies by RPC method.
+        //       // For example, this method will return a transaction hash hexadecimal string on success.
+        //     })
+        //     .catch((error) => {
+        //       // If the request fails, the Promise will reject with an error.
+        //     });
+        // }else{
+        //   errorMessageHeader.innerHTML = "please connect an account"
+        // }
       });
       MetaMaskClientCheck();
     };

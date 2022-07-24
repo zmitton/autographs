@@ -19,6 +19,7 @@
   "homepage": "https://github.com/zmitton/autographs#readme",
   "dependencies": {
     "signature_pad": "^4.0.2",
+    "svgo": "^2.8.0",
     "web3": "^1.7.4"
   }
 }

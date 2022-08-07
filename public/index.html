@@ -104,11 +104,12 @@
       // console.log("HERER")
       var a = new w3.eth.Contract(abi, address)
       mintAutographButton.addEventListener('click', async () => {
+        const autographerName = window.prompt("Please enter your name.", "Vitalik Buterin")
         errorMessageHeader.innerHTML = ""
         const accounts = await ethereum.request({ method: 'eth_accounts' });
 
         var svg = signaturePad._toSVG(true)
-        var encodedTxdata = a.methods.mint("Vitalik Buterin", svg).encodeABI()
+        var encodedTxdata = a.methods.mint(autographerName, svg).encodeABI()
         // var encodedTxdata = a.methods.mint("Zac Mitton", svg).encodeABI()
         if(accounts && accounts[0]){
           var params = [

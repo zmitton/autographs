@@ -108,30 +108,10 @@
         var optimized = optimize(svg)
 
         function optimize(input){
-
-          // const { optimize } = require('svgo');
           const result = svgo(input, {
-            name: "cleanupNumericValues",
-            // plugins: [
-            //   {
-            //     floatPrecision: 1,
-            //     leadingZero: true,
-            //     defaultPx: true,
-            //     convertToPx: true,
-            //   }
-            // ],
-            // optional but recommended field
-            // path: 'path-to.svg',
-            // all config fields are also available here
-            multipass: true,
+            floatPrecision: 0
           });
-          const output = result.data;
-
-          console.log(input)
-          console.log(output)
-          console.log("INPUT LENGTH: ", input.length)
-          console.log("OUTPUT LENGTH: ", output.length)
-
+          return result.data;
         }
 
         // var encodedTxdata = a.methods.mint("Vitalik Buterin", svg).encodeABI()

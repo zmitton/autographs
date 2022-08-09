@@ -12,8 +12,8 @@
 
   <link rel="stylesheet" href="css/signature-pad.css" type="text/css">
 
-  <!-- <script type='text/javascript' src="./js/truffle-contract.js"></script> -->
   <script type='text/javascript' src="./js/W3.js"></script>
+  <script type='text/javascript' src="./js/svgo.js"></script>
 
 
   <script type="text/javascript">
@@ -108,7 +108,18 @@
         errorMessageHeader.innerHTML = ""
         const accounts = await ethereum.request({ method: 'eth_accounts' });
 
-        var svg = signaturePad._toSVG(true)
+        var unoptimizedSvg = signaturePad._toSVG(true)
+
+        function optimize(input){
+          const result = svgo(input, {
+            floatPrecision: 0
+          });
+          return result.data;
+        }
+
+        var svg = optimize(unoptimizedSvg)
+
+
         var encodedTxdata = a.methods.mint(autographerName, svg).encodeABI()
         // var encodedTxdata = a.methods.mint("Zac Mitton", svg).encodeABI()
         if(accounts && accounts[0]){
@@ -137,7 +148,35 @@
         }else{
           errorMessageHeader.innerHTML = "please connect an account"
         }
+        // var encodedTxdata = a.methods.mint("Vitalik Buterin", svg).encodeABI()
+        // if(accounts && accounts[0]){
+        //   var params = [
+        //     {
+        //       from: accounts[0],
+        //       to: '0xE1265B7d94fFaE79C75F59e3a454a29e7235b1D3',
+        //       // value: '0x00',
+        //       // data: '0x12345678'
+        //       data: encodedTxdata
+        //     },
+        //   ];
+
+        //   ethereum
+        //     .request({
+        //       method: 'eth_sendTransaction',
+        //       params,
+        //     })
+        //     .then((result) => {
+        //       // The result varies by RPC method.
+        //       // For example, this method will return a transaction hash hexadecimal string on success.
+        //     })
+        //     .catch((error) => {
+        //       // If the request fails, the Promise will reject with an error.
+        //     });
+        // }else{
+        //   errorMessageHeader.innerHTML = "please connect an account"
+        // }
       });
+
       MetaMaskClientCheck();
     };
     window.addEventListener('DOMContentLoaded', initialize);
